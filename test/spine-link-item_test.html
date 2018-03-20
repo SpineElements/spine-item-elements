@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<!--
+  ~ Copyright (c) 2000-2018 TeamDev Ltd. All rights reserved.
+  ~ TeamDev PROPRIETARY and CONFIDENTIAL.
+  ~ Use is subject to license terms.
+  -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>spine-link-item test</title>
+
+  <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+  <script src="../../web-component-tester/browser.js"></script>
+
+  <link rel="import" href="testing-utils.html">
+  <link rel="import" href="../spine-link-item.html">
+
+  <custom-style>
+    <style is="custom-style" include="demo-pages-shared-styles">
+    body {
+      margin: 0;
+      font-family: Roboto, Noto, sans-serif;
+      --light-theme-secondary-color: rgba(1, 2, 3, 0.5);
+    }
+    </style>
+  </custom-style>
+</head>
+<body>
+<test-fixture id="link-item">
+  <template>
+    <spine-link-item href="somePage.html">
+      <div class="custom">Some text</div>
+    </spine-link-item>
+  </template>
+</test-fixture>
+
+
+<script>
+  suite('<spine-link-item>', function() {
+
+    test('basic attributes are correct', () => {
+      const linkItem = fixture('link-item');
+      assert.equal(linkItem.getAttribute('role'), 'option');
+      assert.equal(linkItem.getAttribute('tabindex'), '0');
+      assert.isTrue(linkItem.getAttribute('disabled') === null);
+      assert.equal(linkItem.getAttribute('aria-disabled'), 'false');
+
+      const link = linkItem.shadowRoot.querySelector("a");
+      assert.equal(link.getAttribute('tabindex'), '-1');
+      assert.equal(link.getAttribute('href'), 'somePage.html');
+    });
+
+    test('slot content is rendered correctly', done => {
+      const linkItem = fixture('link-item');
+      flush(() => {
+        const slotNodes = linkItem.shadowRoot.querySelector('slot').assignedNodes();
+        _checkNodeList(slotNodes, [
+          _checkers.element({name : 'div', className : 'custom', innerHTML : 'Some text'})
+        ]);
+        done();
+      });
+    });
+
+  });
+</script>
+</body>
+</html>

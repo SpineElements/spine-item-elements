@@ -1,0 +1,34 @@
+<!--
+  ~ Copyright (c) 2000-2018 TeamDev Ltd. All rights reserved.
+  ~ TeamDev PROPRIETARY and CONFIDENTIAL.
+  ~ Use is subject to license terms.
+  -->
+
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../iron-behaviors/iron-control-state.html">
+<link rel="import" href="../iron-behaviors/iron-button-state.html">
+
+<dom-module id="spine-abstract-item">
+  <script>
+    /**
+     * Defines a base class for custom item elements that complement the standard `paper-item`
+     * component for various usage scenarios.
+     */
+    class SpineAbstractItem extends Polymer.mixinBehaviors([
+      Polymer.IronButtonState,
+      Polymer.IronControlState
+    ], Polymer.Element) {
+      _getAriaRole() {
+        // see ARIA roles here: https://www.w3.org/TR/wai-aria-1.1/#role_definitions
+        return 'option';
+      }
+
+      connectedCallback() {
+        super.connectedCallback();
+        this._ensureAttribute('tabindex', '0');
+        this._ensureAttribute('role', this._getAriaRole());
+      }
+    }
+  </script>
+</dom-module>
