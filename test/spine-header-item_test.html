@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<!--
+  ~ Copyright (c) 2000-2018 TeamDev Ltd. All rights reserved.
+  ~ TeamDev PROPRIETARY and CONFIDENTIAL.
+  ~ Use is subject to license terms.
+  -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>spine-header-item test</title>
+
+  <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+  <script src="../../web-component-tester/browser.js"></script>
+
+  <link rel="import" href="testing-utils.html">
+  <link rel="import" href="../spine-header-item.html">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Roboto, Noto, sans-serif;
+    }
+  </style>
+</head>
+<body>
+<test-fixture id="header-item">
+  <template>
+    <spine-header-item>Header text</spine-header-item>
+  </template>
+</test-fixture>
+
+<script>
+  suite('<spine-header-item>', function() {
+
+    test('basic attributes are correct', () => {
+      const headerItem = fixture('header-item');
+      assert.equal(headerItem.getAttribute('role'), 'heading');
+      assert.equal(headerItem.getAttribute('tabindex'), '-1');
+      assert.isTrue(headerItem.getAttribute('disabled') != null);
+      assert.equal(headerItem.getAttribute('aria-disabled'), 'true');
+    });
+
+    test('text content is correct', () => {
+      const headerItem = fixture('header-item');
+      const slot = headerItem.shadowRoot.querySelector('slot');
+      const assignedNodes = slot.assignedNodes();
+      assert.equal(assignedNodes.length, 1);
+      const slotContent = assignedNodes[0];
+      assert.equal(slotContent.nodeName, _NodeNames.TEXT);
+      assert.equal(slotContent.data.trim(), 'Header text');
+    });
+  });
+</script>
+</body>
+</html>
