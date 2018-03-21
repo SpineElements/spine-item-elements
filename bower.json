@@ -5,9 +5,14 @@
     "web-components",
     "web-component",
     "polymer",
-    "avatar"
+    "item"
   ],
-  "main": "spine-avatar.html",
+  "main": [
+    "spine-header-item.html",
+    "spine-link-item.html",
+    "spine-separator-item.html",
+    "spine-item-body.html"
+  ],
   "dependencies": {
     "polymer": "Polymer/polymer#^2.0.0",
     "iron-flex-layout": "PolymerElements/iron-flex-layout#^2.0.0",

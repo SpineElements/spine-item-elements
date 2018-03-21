@@ -135,3 +135,9 @@ Custom property                 | Description                                   
 `--spine-item-body-main-cell`   | Mixin applied to a cell that contains the the elements placed into `spine-item-body` | `{}`
 `--spine-item-body-before-cell` | Mixin applied to a cell that contains the `before` slot | `{}`
 `--spine-item-body-after-cell`  | Mixin applied to a cell that contains the `after` slot  | `{}`
+
+# License
+
+Apache License
+
+Version 2.0, January 2004
