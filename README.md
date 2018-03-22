@@ -22,9 +22,11 @@ Similar to `paper-item`, you can place arbitrary content as its child nodes.
 
 Here's a list of CSS mixins that can be used for customizing `spine-header-item`:
 
-Custom property       | Description                  | Default
-----------------------|------------------------------|--------
-`--spine-header-item` | Mixin applied to the element | `{}`
+Custom property                  | Description                  | Default
+---------------------------------|------------------------------|--------
+`--spine-header-item`            | Mixin applied to the element | `{}`
+`--spine-header-item-min-height` | Minimum height for the item  | `32px`
+`--secondary-text-color`         | The default text color       | `rgba(0, 0, 0, var(--dark-secondary-opacity, 0.54))`
 
 ## `spine-link-item`
 
@@ -52,11 +54,13 @@ You can change this using the `--spine-link-item-content-container` mixin.
 
 The focused, selected and hovered states result in a `::before` pseudo element to be included, which
 is laid out to fill the entire element under the `spine-link-item`'s content. You can use the
-`--spine-link-item-hovered-before`,
-`--spine-link-item-selected-before`, and `--spine-link-item-focused-before` CSS variables to
-highlight the background in these states.
+`--spine-link-item-hovered-before`, `--spine-link-item-selected-before`, and
+`--spine-link-item-focused-before` CSS variables to highlight the background in these states. Note
+that by default the background of the `::before` pseudo element is set to `currentColor` and
+`opacity` attribute is used for setting the intensity of the background color.
 
-Here's a list of CSS variables and mixins for customizing `spine-link-item`:
+Below is a list of CSS variables and mixins for customizing `spine-link-item`. A "background layer"
+mentioned below refers to the `::before` pseudo element mentioned above.
 
 Custom property                       | Description                                   | Default
 --------------------------------------|-----------------------------------------------|----------
@@ -67,14 +71,16 @@ Custom property                       | Description                             
 `--spine-link-item-hovered`           | Mixin applied to the item when it is hovered  | `{}`
 `--spine-link-item-hovered-before`    | Mixin for hovered item's background layer     | `{}`
 `--spine-link-item-selected`          | Mixin applied to the item when it is selected | `{}`
-`--spine-link-item-selected-before`   | Mixin for elected item's background layer     | `{}`
+`--spine-link-item-selected-before`   | Mixin for selected item's background layer    | `{}`
 `--spine-link-item-focused`           | Mixin applied to the item when it is focused  | `{}`
 `--spine-link-item-focused-before`    | Mixin for focused item's background layer     | `{}`
+`--dark-divider-opacity`              | Default opacity of a focused background (applied to the background layer) | `0.12`
+`--disabled-text-color`               | Default text color for a disabled item        | `{rgba(0, 0, 0, var(--dark-disabled-opacity, 0.38))}`
 
 ## `spine-separator-item`
 
 `spine-separator-item` can be used inside `paper-listbox` among its children to separate them into
-logical groups. It is a non-selectable item that displays a horizontal line whose style can be 
+logical groups. It is a non-selectable item that displays a horizontal line whose style can be
 customized.
 
 Here's a list of CSS variables that can be used for customizing `spine-separator-item`:
@@ -82,7 +88,7 @@ Here's a list of CSS variables that can be used for customizing `spine-separator
 Custom property                       | Description                                                              | Default
 --------------------------------------|--------------------------------------------------------------------------|----------
 `--spine-separator-item-vert-padding` | A distance from the separator line to the element's top and bottom edges | `8px`
-`--spine-separator-item-line`         | A CSS border-like declaration that identifies the separator line's style, e.g. `1px dotted gray` | `1px solid var(--light-theme-divider-color)`
+`--spine-separator-item-line`         | A CSS border-like declaration that identifies the separator line's style, e.g. `1px dotted gray` | `1px solid var(--divider-color, rgba(0, 0, 0, var(--dark-divider-opacity, 0.12)))`
 
 ## `spine-item-body`
 
@@ -135,6 +141,8 @@ Custom property                 | Description                                   
 `--spine-item-body-main-cell`   | Mixin applied to a cell that contains the the elements placed into `spine-item-body` | `{}`
 `--spine-item-body-before-cell` | Mixin applied to a cell that contains the `before` slot | `{}`
 `--spine-item-body-after-cell`  | Mixin applied to a cell that contains the `after` slot  | `{}`
+`--paper-font-body1`            | Style applied to the secondary element(s) by default    | `{}`
+`--secondary-text-color`        | Text color set for secondary element(s) by default      | `rgba(0, 0, 0, var(--dark-secondary-opacity, 0.54))`
 
 # License
 
