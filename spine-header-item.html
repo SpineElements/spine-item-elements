@@ -18,9 +18,10 @@ Similar to `paper-item`, you can place arbitrary content as its child nodes.
 
 Here's a list of CSS mixins that can be used for customizing `spine-header-item`:
 
-Custom property       | Description                  | Default
-----------------------|------------------------------|--------
-`--spine-header-item` | Mixin applied to the element | `{}`
+Custom property                  | Description                  | Default
+---------------------------------|------------------------------|--------
+`--spine-header-item`            | Mixin applied to the element | `{}`
+`--spine-header-item-min-height` | Minimum height for the item  | `32px`
 
 -->
 <dom-module id="spine-header-item">
@@ -30,7 +31,7 @@ Custom property       | Description                  | Default
         @apply --layout-horizontal;
         @apply --layout-center;
 
-        min-height: 40px;
+        min-height: var(--spine-header-item-min-height, 32px);
         outline: none;
         padding: 0 16px;
 
