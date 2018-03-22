@@ -22,6 +22,7 @@ Custom property                  | Description                  | Default
 ---------------------------------|------------------------------|--------
 `--spine-header-item`            | Mixin applied to the element | `{}`
 `--spine-header-item-min-height` | Minimum height for the item  | `32px`
+`--secondary-text-color`         | The default text color       | `rgba(0, 0, 0, var(--dark-secondary-opacity, 0.54))`
 
 -->
 <dom-module id="spine-header-item">
@@ -36,7 +37,7 @@ Custom property                  | Description                  | Default
         padding: 0 16px;
 
         @apply --paper-font-caption;
-        color: var(--light-theme-secondary-color);
+        color: var(--secondary-text-color, rgba(0, 0, 0, var(--dark-secondary-opacity, 0.54)));
 
         @apply --spine-header-item;
       }
