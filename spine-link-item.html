@@ -36,11 +36,13 @@ You can change this using the `--spine-link-item-content-container` mixin.
 
 The focused, selected and hovered states result in a `::before` pseudo element to be included, which
 is laid out to fill the entire element under the `spine-link-item`'s content. You can use the
-`--spine-link-item-hovered-before`,
-`--spine-link-item-selected-before`, and `--spine-link-item-focused-before` CSS variables to
-highlight the background in these states.
+`--spine-link-item-hovered-before`, `--spine-link-item-selected-before`, and
+`--spine-link-item-focused-before` CSS variables to highlight the background in these states. Note
+that by default the background of the `::before` pseudo element is set to `currentColor` and
+`opacity` attribute is used for setting the intensity of the background color.
 
-Here's a list of CSS variables and mixins for customizing `spine-link-item`:
+Below is a list of CSS variables and mixins for customizing `spine-link-item`. A "background layer"
+mentioned below refers to the `::before` pseudo element mentioned above.
 
 Custom property                       | Description                                   | Default
 --------------------------------------|-----------------------------------------------|----------
@@ -51,9 +53,11 @@ Custom property                       | Description                             
 `--spine-link-item-hovered`           | Mixin applied to the item when it is hovered  | `{}`
 `--spine-link-item-hovered-before`    | Mixin for hovered item's background layer     | `{}`
 `--spine-link-item-selected`          | Mixin applied to the item when it is selected | `{}`
-`--spine-link-item-selected-before`   | Mixin for elected item's background layer     | `{}`
+`--spine-link-item-selected-before`   | Mixin for selected item's background layer    | `{}`
 `--spine-link-item-focused`           | Mixin applied to the item when it is focused  | `{}`
 `--spine-link-item-focused-before`    | Mixin for focused item's background layer     | `{}`
+`--dark-divider-opacity`              | Default opacity of a focused background (applied to the background layer) | `0.12`
+`--disabled-text-color`               | Default text color for a disabled item        | `{rgba(0, 0, 0, var(--dark-disabled-opacity, 0.38))}`
 
 -->
 <dom-module id="spine-link-item">
@@ -72,6 +76,8 @@ Custom property                       | Description                             
         @apply --spine-link-item;
       }
       :host([disabled]) {
+        color: var(--disabled-text-color, rgba(0, 0, 0, var(--dark-disabled-opacity, 0.38)));
+
         @apply --spine-link-item-disabled;
       }
       :host(:hover) {

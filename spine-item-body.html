@@ -59,6 +59,8 @@ Custom property                 | Description                                   
 `--spine-item-body-main-cell`   | Mixin applied to a cell that contains the the elements placed into `spine-item-body` | `{}`
 `--spine-item-body-before-cell` | Mixin applied to a cell that contains the `before` slot | `{}`
 `--spine-item-body-after-cell`  | Mixin applied to a cell that contains the `after` slot  | `{}`
+`--paper-font-body1`            | Style applied to the secondary element(s) by default    | `{}`
+`--secondary-text-color`        | Text color set for secondary element(s) by default      | `rgba(0, 0, 0, var(--dark-secondary-opacity, 0.54))`
 
 -->
 <dom-module id="spine-item-body">
@@ -102,7 +104,7 @@ Custom property                 | Description                                   
 
       :host > div > ::slotted([secondary]) {
         @apply --paper-font-body1;
-        color: var(--secondary-text-color);
+        color: var(--secondary-text-color, rgba(0, 0, 0, var(--dark-secondary-opacity, 0.54)));
 
         @apply --spine-item-body-secondary;
         text-overflow: ellipsis;
