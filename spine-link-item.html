@@ -56,6 +56,7 @@ Custom property                       | Description                             
 `--spine-link-item-selected-before`   | Mixin for selected item's background layer    | `{}`
 `--spine-link-item-focused`           | Mixin applied to the item when it is focused  | `{}`
 `--spine-link-item-focused-before`    | Mixin for focused item's background layer     | `{}`
+`--paper-font-subhead`                | Applied to the item by default                | `{}`
 `--dark-divider-opacity`              | Default opacity of a focused background (applied to the background layer) | `0.12`
 `--disabled-text-color`               | Default text color for a disabled item        | `{rgba(0, 0, 0, var(--dark-disabled-opacity, 0.38))}`
 
@@ -72,6 +73,7 @@ Custom property                       | Description                             
         position: relative; /* needed for the absolutely-positioned ::after pseudo-element to be
                                displayed properly */
         min-height: var(--spine-link-item-min-height, 48px);
+        cursor: pointer;
 
         @apply --spine-link-item;
       }
