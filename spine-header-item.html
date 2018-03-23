@@ -21,8 +21,8 @@ Here's a list of CSS mixins that can be used for customizing `spine-header-item`
 Custom property                  | Description                       | Default
 ---------------------------------|-----------------------------------|--------
 `--spine-header-item`            | Mixin applied to the element      | `{}`
-`--spine-header-item-min-height` | Minimum height for the item       | `32px`
-`--paper-font-caption`           | Applied to the element by default | `{}`
+`--spine-header-item-min-height` | Minimum height for the item       | `40px`
+`--paper-font-body2`             | Applied to the element by default | `{}`
 `--secondary-text-color`         | The default text color            | `rgba(0, 0, 0, var(--dark-secondary-opacity, 0.54))`
 
 -->
@@ -33,11 +33,11 @@ Custom property                  | Description                       | Default
         @apply --layout-horizontal;
         @apply --layout-center;
 
-        min-height: var(--spine-header-item-min-height, 32px);
+        min-height: var(--spine-header-item-min-height, 40px);
         outline: none;
         padding: 0 16px;
 
-        @apply --paper-font-caption;
+        @apply --paper-font-body2;
         color: var(--secondary-text-color, rgba(0, 0, 0, var(--dark-secondary-opacity, 0.54)));
 
         @apply --spine-header-item;
