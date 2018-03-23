@@ -22,11 +22,12 @@ Similar to `paper-item`, you can place arbitrary content as its child nodes.
 
 Here's a list of CSS mixins that can be used for customizing `spine-header-item`:
 
-Custom property                  | Description                  | Default
----------------------------------|------------------------------|--------
-`--spine-header-item`            | Mixin applied to the element | `{}`
-`--spine-header-item-min-height` | Minimum height for the item  | `32px`
-`--secondary-text-color`         | The default text color       | `rgba(0, 0, 0, var(--dark-secondary-opacity, 0.54))`
+Custom property                  | Description                       | Default
+---------------------------------|-----------------------------------|--------
+`--spine-header-item`            | Mixin applied to the element      | `{}`
+`--spine-header-item-min-height` | Minimum height for the item       | `40px`
+`--paper-font-body2`             | Applied to the element by default | `{}`
+`--secondary-text-color`         | The default text color            | `rgba(0, 0, 0, var(--dark-secondary-opacity, 0.54))`
 
 ## `spine-link-item`
 
@@ -74,6 +75,7 @@ Custom property                       | Description                             
 `--spine-link-item-selected-before`   | Mixin for selected item's background layer    | `{}`
 `--spine-link-item-focused`           | Mixin applied to the item when it is focused  | `{}`
 `--spine-link-item-focused-before`    | Mixin for focused item's background layer     | `{}`
+`--paper-font-subhead`                | Applied to the item by default                | `{}`
 `--dark-divider-opacity`              | Default opacity of a focused background (applied to the background layer) | `0.12`
 `--disabled-text-color`               | Default text color for a disabled item        | `{rgba(0, 0, 0, var(--dark-disabled-opacity, 0.38))}`
 
