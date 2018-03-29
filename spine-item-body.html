@@ -18,9 +18,14 @@ A component has two slots:
 - `before`: can be used to place a custom content in a left side of the item;
 - `after`: can be used to place a custom content in a right side of the item.
 
-You can place several child elements, which will distribute them vertically inside an item's area.
-Specifying a `secondary` attribute for any of these elements will apply the "secondary" text style
-(having a gray color by default) to the respective element.
+Child nodes placed into `spine-item-body` are laid out with a vertical flex layout. It can be
+configured using the `--spine-item-body-main-cell` CSS mixin. Specifying a `secondary` attribute for
+any of the child elements will apply the "secondary" text style (having a gray color by default) to
+them.
+
+Nodes placed into the `before` and `after` slots are laid out with a centered horizontal flex layout
+by default, which can be changed using the `--spine-item-body-before-cell` and
+`--spine-item-body-after-cell` CSS mixins.
 
 Example:
 ```
@@ -54,13 +59,14 @@ Example:
 
 Here's a list of CSS mixins that can be used for customizing `spine-item-body`:
 
-Custom property                 | Description                                             | Default
---------------------------------|---------------------------------------------------------|----------
+Custom property                 | Description                                               | Default
+--------------------------------|-----------------------------------------------------------|----------
 `--spine-item-body-main-cell`   | Mixin applied to a cell that contains the the elements placed into `spine-item-body` | `{}`
-`--spine-item-body-before-cell` | Mixin applied to a cell that contains the `before` slot | `{}`
-`--spine-item-body-after-cell`  | Mixin applied to a cell that contains the `after` slot  | `{}`
-`--paper-font-body1`            | Style applied to the secondary element(s) by default    | `{}`
-`--secondary-text-color`        | Text color set for secondary element(s) by default      | `rgba(0, 0, 0, var(--dark-secondary-opacity, 0.54))`
+`--spine-item-body-before-cell` | Mixin applied to a cell that contains the `before` slot   | `{}`
+`--spine-item-body-after-cell`  | Mixin applied to a cell that contains the `after` slot    | `{}`
+`--spine-item-body-secondary`   | Mixin applied to child nodes with a `secondary` attribute | `{}`
+`--paper-font-body1`            | Style applied to secondary element(s) by default          | `{}`
+`--secondary-text-color`        | Text color set for secondary element(s) by default        | `rgba(0, 0, 0, var(--dark-secondary-opacity, 0.54))`
 
 -->
 <dom-module id="spine-item-body">
@@ -94,6 +100,7 @@ Custom property                 | Description                                   
 
       .main-cell {
         @apply --layout-flex-auto;
+
         @apply --layout-center-justified;
         @apply --layout-vertical;
         min-width: 0;
