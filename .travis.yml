@@ -5,8 +5,11 @@ node_js: lts/*
 #   https://github.com/travis-ci/travis-ci/issues/8836#issuecomment-356339798
 #   https://github.com/travis-ci/travis-ci/issues/8836#issuecomment-356362524
 sudo: required
+
 addons:
   firefox: latest
+  chrome: stable
+
 before_script:
 - npm install -g polymer-cli
 - polymer install
