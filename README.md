@@ -43,10 +43,10 @@ Example:
   </spine-link-item>
   <spine-link-item href="/settings/notifications">
     Notifications
-  </proljwc-link-item>
+  </spine-link-item>
   <spine-link-item href="/settings/security">
     Security
-  </proljwc-link-item>
+  </spine-link-item>
 </paper-listbox>
 ```
 
