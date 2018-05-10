@@ -12,6 +12,9 @@
   <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
   <script src="../../web-component-tester/browser.js"></script>
 
+  <link rel="import" href="../../iron-test-helpers/iron-test-helpers.html">
+  <link rel="import" href="../../spine-test-helpers/spine-test-helpers.html">
+  <link rel="import" href="../../app-route/app-location.html">
   <link rel="import" href="testing-utils.html">
   <link rel="import" href="../spine-link-item.html">
 
@@ -33,10 +36,27 @@
     </spine-link-item>
   </template>
 </test-fixture>
+<test-fixture id="cooperation-with-app-location">
+  <template>
+    <div>
+      <app-location></app-location>
+      <spine-link-item href="somePage1.html">
+        <div class="custom">Link item 1</div>
+      </spine-link-item>
+      <spine-link-item href="somePage2.html">
+        <div class="custom">Link item 2</div>
+      </spine-link-item>
+    </div>
+  </template>
+</test-fixture>
 
 
 <script>
   suite('<spine-link-item>', function() {
+
+    function clickItem(itemElement) {
+      MockInteractions.keyDownOn(itemElement, 13);
+    }
 
     test('basic attributes are correct', () => {
       const linkItem = fixture('link-item');
@@ -58,6 +78,47 @@
           _checkers.element({name : 'div', className : 'custom', innerHTML : 'Some text'})
         ]);
         done();
+      });
+    });
+
+    test('works with app-location correctly', done => {
+      const testFixture = fixture('cooperation-with-app-location');
+      flush(() => {
+        const linkItems = testFixture.querySelectorAll('spine-link-item');
+        const appLocation = testFixture.querySelector('app-location');
+        assert.equal(linkItems.length, 2, 'expecting two test links');
+        const valueToPreserve = {};
+        linkItems[0].__spineTestValue = valueToPreserve;
+
+        const ensureUrlUpdatedButDocumentRemained = (expectedUrlSuffix, message) => {
+          const expectedRoute = `/components/spine-item-elements/test/${expectedUrlSuffix}`;
+          assert.isTrue(document.location.href.endsWith(expectedRoute),
+              `${message}: document URL should be changed`);
+          assert.equal(appLocation.route.path, expectedRoute,
+              `${message}: checking the route.path property of app-location`);
+          // Ensure that iron-location (used by app-location) prevents default link click actions:
+          // https://github.com/PolymerElements/iron-location/blob/23cbb3dad0ba549033ef6874befd0da5f3878b5f/iron-location.html#L301
+          //
+          // This used to break in Firefox due to `click` events dispatched by `link.click()` calls
+          // not bubbling beyond shadow root, and thus weren't prevented on the document level by
+          // iron-location: https://github.com/TeamDev-Ltd/License-Server/issues/87
+          assert.strictEqual(linkItems[0].__spineTestValue, valueToPreserve,
+              'Document itself shouldn\'t be reloaded');
+        };
+
+        runAsyncChain({interval: 500},
+          () => {
+            clickItem(linkItems[0]);
+          }, () => {
+            ensureUrlUpdatedButDocumentRemained('somePage1.html',
+                'checking navigation using item 1');
+            clickItem(linkItems[1]);
+          }, () => {
+            ensureUrlUpdatedButDocumentRemained('somePage2.html',
+                'checking navigation using item 2');
+            done();
+          }
+        );
       });
     });
 
