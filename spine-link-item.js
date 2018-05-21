@@ -1,17 +1,16 @@
-<!--
+/*
   ~ Copyright (c) 2000-2018 TeamDev Ltd. All rights reserved.
   ~ TeamDev PROPRIETARY and CONFIDENTIAL.
   ~ Use is subject to license terms.
-  -->
+  */
+import '@polymer/polymer/polymer-legacy.js';
 
-<link rel="import" href="../polymer/polymer.html">
-<link rel="import" href="../polymer/polymer-element.html">
-<link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
+import '@polymer/polymer/polymer-element.js';
+import '@polymer/iron-flex-layout/iron-flex-layout.js';
+import { SpineAbstractItem } from './spine-abstract-item.js';
+import { html } from '@polymer/polymer/lib/utils/html-tag.js';
 
-<link rel="import" href="spine-abstract-item.html">
-
-
-<!--
+/**
 `spine-link-item` can be placed into `paper-listbox` to display an item that navigates to the
 specified URL when it is clicked or tapped. Use the `href` attribute to specify the URL that should
 be navigated to when this item is clicked or tapped.
@@ -60,9 +59,10 @@ Custom property                       | Description                             
 `--dark-divider-opacity`              | Default opacity of a focused background (applied to the background layer) | `0.12`
 `--disabled-text-color`               | Default text color for a disabled item        | `{rgba(0, 0, 0, var(--dark-disabled-opacity, 0.38))}`
 
--->
-<dom-module id="spine-link-item">
-  <template>
+*/
+class SpineLinkItem extends SpineAbstractItem {
+  static get template() {
+    return html`
     <style>
       :host {
         @apply --layout-horizontal;
@@ -143,64 +143,61 @@ Custom property                       | Description                             
          other bright-colored) content to be dimmed when an item is highlighted during hover,
          selection, or focus when using background filled highlighting for these states. -->
     <div class="content-container"><slot></slot></div>
-  </template>
+`;
+  }
 
-  <script>
-    class SpineLinkItem extends SpineAbstractItem {
-      static get is() { return 'spine-link-item'; }
+  static get is() { return 'spine-link-item'; }
 
-      static get properties() {
-        return {
-          /**
-           * A URL that should be opened when this item is selected.
-           */
-          href: String,
-        };
-      }
+  static get properties() {
+    return {
+      /**
+       * A URL that should be opened when this item is selected.
+       */
+      href: String,
+    };
+  }
 
-      connectedCallback() {
-        super.connectedCallback();
-        this.addEventListener('tap', this._handleTap);
-      }
+  connectedCallback() {
+    super.connectedCallback();
+    this.addEventListener('tap', this._handleTap);
+  }
 
-      disconnectedCallback() {
-        super.disconnectedCallback();
-        this.removeEventListener('tap', this._handleTap);
-      }
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    this.removeEventListener('tap', this._handleTap);
+  }
 
-      _handleTap(event) {
-        if (this.__customEvent) {
-          // dispatching `click` event manually below in this method is reintercepted as a `tap`
-          // event by this element, so we're ignoring it here to avoid infinite recursion
-          return;
-        }
-        const link = this.shadowRoot.querySelector('a');
-        if (link === null) {
-          return;
-        }
-
-        if (!window.ShadyDOM || !window.ShadyDOM.inUse) {
-          link.click();
-        } else {
-          // Not invoking the `link.click()` as in a regular case above, since a `click` event
-          // emitted by that call doesn't cross the shadow DOM boundary in Firefox (as of version
-          // 59.0.3), presumably due to some ShadyDOM polyfill implementation specifics. This causes
-          // problems when `iron-location` (or `app-location`) tries to prevent page reloads on link
-          // clicks. Firing the `click` event manually solves this problem.
-          this.__customEvent = new MouseEvent('click', {
-            bubbles: true,
-            composed: true,
-            cancelable: true
-          });
-          try {
-            link.dispatchEvent(this.__customEvent);
-          } finally {
-            this.__customEvent = null;
-          }
-        }
-      }
+  _handleTap(event) {
+    if (this.__customEvent) {
+      // dispatching `click` event manually below in this method is reintercepted as a `tap`
+      // event by this element, so we're ignoring it here to avoid infinite recursion
+      return;
+    }
+    const link = this.shadowRoot.querySelector('a');
+    if (link === null) {
+      return;
     }
 
-    window.customElements.define(SpineLinkItem.is, SpineLinkItem);
-  </script>
-</dom-module>
+    if (!window.ShadyDOM || !window.ShadyDOM.inUse) {
+      link.click();
+    } else {
+      // Not invoking the `link.click()` as in a regular case above, since a `click` event
+      // emitted by that call doesn't cross the shadow DOM boundary in Firefox (as of version
+      // 59.0.3), presumably due to some ShadyDOM polyfill implementation specifics. This causes
+      // problems when `iron-location` (or `app-location`) tries to prevent page reloads on link
+      // clicks. Firing the `click` event manually solves this problem.
+      this.__customEvent = new MouseEvent('click', {
+        bubbles: true,
+        composed: true,
+        cancelable: true
+      });
+      try {
+        link.dispatchEvent(this.__customEvent);
+      } finally {
+        this.__customEvent = null;
+      }
+    }
+  }
+}
+
+window.customElements.define(SpineLinkItem.is, SpineLinkItem);

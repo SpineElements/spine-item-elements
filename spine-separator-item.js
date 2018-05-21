@@ -1,17 +1,16 @@
-<!--
+/*
   ~ Copyright (c) 2000-2018 TeamDev Ltd. All rights reserved.
   ~ TeamDev PROPRIETARY and CONFIDENTIAL.
   ~ Use is subject to license terms.
-  -->
+  */
+import '@polymer/polymer/polymer-legacy.js';
 
-<link rel="import" href="../polymer/polymer.html">
-<link rel="import" href="../polymer/polymer-element.html">
-<link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
+import '@polymer/polymer/polymer-element.js';
+import '@polymer/iron-flex-layout/iron-flex-layout.js';
+import { SpineAbstractItem } from './spine-abstract-item.js';
+import { html } from '@polymer/polymer/lib/utils/html-tag.js';
 
-<link rel="import" href="spine-abstract-item.html">
-
-
-<!--
+/**
 `spine-separator-item` can be used inside `paper-listbox` among its children to separate them into
 logical groups. It is a non-selectable item that displays a horizontal line whose style can be
 customized.
@@ -23,9 +22,10 @@ Custom property                       | Description                             
 `--spine-separator-item-vert-padding` | A distance from the separator line to the element's top and bottom edges | `8px`
 `--spine-separator-item-line`         | A CSS border-like declaration that identifies the separator line's style, e.g. `1px dotted gray` | `1px solid var(--divider-color, rgba(0, 0, 0, var(--dark-divider-opacity, 0.12)))`
 
--->
-<dom-module id="spine-separator-item">
-  <template>
+*/
+class SpineSeparatorItem extends SpineAbstractItem {
+  static get template() {
+    return html`
     <style>
       :host {
         @apply --layout-horizontal;
@@ -41,23 +41,20 @@ Custom property                       | Description                             
     </style>
 
     <div class="separator-line"></div>
-  </template>
+`;
+  }
 
-  <script>
-    class SpineSeparatorItem extends SpineAbstractItem {
-      static get is() { return 'spine-separator-item'; }
+  static get is() { return 'spine-separator-item'; }
 
-      _getAriaRole() {
-        return 'separator';
-      }
+  _getAriaRole() {
+    return 'separator';
+  }
 
-      connectedCallback() {
-        super.connectedCallback();
-        this.removeAttribute('tabindex');
-        this.setAttribute('disabled', 'disabled');
-      }
-    }
+  connectedCallback() {
+    super.connectedCallback();
+    this.removeAttribute('tabindex');
+    this.setAttribute('disabled', 'disabled');
+  }
+}
 
-    window.customElements.define(SpineSeparatorItem.is, SpineSeparatorItem);
-  </script>
-</dom-module>
+window.customElements.define(SpineSeparatorItem.is, SpineSeparatorItem);

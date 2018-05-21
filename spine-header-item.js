@@ -1,17 +1,16 @@
-<!--
+/*
   ~ Copyright (c) 2000-2018 TeamDev Ltd. All rights reserved.
   ~ TeamDev PROPRIETARY and CONFIDENTIAL.
   ~ Use is subject to license terms.
-  -->
+  */
+import '@polymer/polymer/polymer-legacy.js';
 
-<link rel="import" href="../polymer/polymer.html">
-<link rel="import" href="../polymer/polymer-element.html">
-<link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
+import '@polymer/polymer/polymer-element.js';
+import '@polymer/iron-flex-layout/iron-flex-layout.js';
+import { SpineAbstractItem } from './spine-abstract-item.js';
+import { html } from '@polymer/polymer/lib/utils/html-tag.js';
 
-<link rel="import" href="spine-abstract-item.html">
-
-
-<!--
+/**
 `spine-header-item` can be used inside `paper-listbox` among its children to display a
 non-selectable item that will serve as a heading for the items that follow it in the list.
 Similar to `paper-item`, you can place arbitrary content as its child nodes.
@@ -25,9 +24,10 @@ Custom property                  | Description                       | Default
 `--paper-font-body2`             | Applied to the element by default | `{}`
 `--secondary-text-color`         | The default text color            | `rgba(0, 0, 0, var(--dark-secondary-opacity, 0.54))`
 
--->
-<dom-module id="spine-header-item">
-  <template>
+*/
+class SpineHeaderItem extends SpineAbstractItem {
+  static get template() {
+    return html`
     <style>
       :host {
         @apply --layout-horizontal;
@@ -45,23 +45,20 @@ Custom property                  | Description                       | Default
     </style>
 
     <slot></slot>
-  </template>
+`;
+  }
 
-  <script>
-    class SpineHeaderItem extends SpineAbstractItem {
-      static get is() { return 'spine-header-item'; }
+  static get is() { return 'spine-header-item'; }
 
-      _getAriaRole() {
-        // as per recommendations here: https://www.w3.org/WAI/tutorials/menus/structure/#label-menus
-        return 'heading';
-      }
+  _getAriaRole() {
+    // as per recommendations here: https://www.w3.org/WAI/tutorials/menus/structure/#label-menus
+    return 'heading';
+  }
 
-      connectedCallback() {
-        super.connectedCallback();
-        this.setAttribute("disabled", "disabled");
-      }
-    }
+  connectedCallback() {
+    super.connectedCallback();
+    this.setAttribute("disabled", "disabled");
+  }
+}
 
-    window.customElements.define(SpineHeaderItem.is, SpineHeaderItem);
-  </script>
-</dom-module>
+window.customElements.define(SpineHeaderItem.is, SpineHeaderItem);

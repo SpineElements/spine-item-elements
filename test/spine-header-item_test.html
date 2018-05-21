@@ -10,10 +10,10 @@
   <title>spine-header-item test</title>
 
   <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
-  <script src="../../web-component-tester/browser.js"></script>
-
-  <link rel="import" href="testing-utils.html">
-  <link rel="import" href="../spine-header-item.html">
+  <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
+  <script src="../node_modules/wct-browser-legacy/browser.js"></script>
+  <script type="module" src="./testing-utils.js"></script>
+  <script type="module" src="../spine-header-item.js"></script>
 
   <style>
     body {
@@ -29,27 +29,30 @@
   </template>
 </test-fixture>
 
-<script>
+<script type="module">
+  import './testing-utils.js';
+  import '../spine-header-item.js';
+
   suite('<spine-header-item>', function() {
 
-    test('basic attributes are correct', () => {
-      const headerItem = fixture('header-item');
-      assert.equal(headerItem.getAttribute('role'), 'heading');
-      assert.equal(headerItem.getAttribute('tabindex'), '-1');
-      assert.isTrue(headerItem.getAttribute('disabled') != null);
-      assert.equal(headerItem.getAttribute('aria-disabled'), 'true');
-    });
-
-    test('text content is correct', () => {
-      const headerItem = fixture('header-item');
-      const slot = headerItem.shadowRoot.querySelector('slot');
-      const assignedNodes = slot.assignedNodes();
-      assert.equal(assignedNodes.length, 1);
-      const slotContent = assignedNodes[0];
-      assert.equal(slotContent.nodeName, _NodeNames.TEXT);
-      assert.equal(slotContent.data.trim(), 'Header text');
-    });
+  test('basic attributes are correct', () => {
+    const headerItem = fixture('header-item');
+    assert.equal(headerItem.getAttribute('role'), 'heading');
+    assert.equal(headerItem.getAttribute('tabindex'), '-1');
+    assert.isTrue(headerItem.getAttribute('disabled') != null);
+    assert.equal(headerItem.getAttribute('aria-disabled'), 'true');
   });
+
+  test('text content is correct', () => {
+    const headerItem = fixture('header-item');
+    const slot = headerItem.shadowRoot.querySelector('slot');
+    const assignedNodes = slot.assignedNodes();
+    assert.equal(assignedNodes.length, 1);
+    const slotContent = assignedNodes[0];
+    assert.equal(slotContent.nodeName, _NodeNames.TEXT);
+    assert.equal(slotContent.data.trim(), 'Header text');
+  });
+});
 </script>
 </body>
 </html>

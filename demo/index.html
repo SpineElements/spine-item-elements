@@ -7,19 +7,31 @@
   <title>Spine item elements demo</title>
 
   <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+  <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
 
-  <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
-  <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
-  <link rel="import" href="../../iron-icons/iron-icons.html">
-  <link rel="import" href="../../iron-icon/iron-icon.html">
-  <link rel="import" href="../../paper-styles/typography.html">
-  <link rel="import" href="../../paper-listbox/paper-listbox.html">
-  <link rel="import" href="../spine-header-item.html">
-  <link rel="import" href="../spine-link-item.html">
-  <link rel="import" href="../spine-separator-item.html">
-  <link rel="import" href="../spine-item-body.html">
+  <script type="module" src="../node_modules/@polymer/iron-demo-helpers/demo-pages-shared-styles.js"></script>
+  <script type="module" src="../node_modules/@polymer/iron-demo-helpers/demo-snippet.js"></script>
+  <script type="module" src="../node_modules/@polymer/iron-icons/iron-icons.js"></script>
+  <script type="module" src="../node_modules/@polymer/iron-icon/iron-icon.js"></script>
+  <script type="module" src="../node_modules/@polymer/paper-styles/typography.js"></script>
+  <script type="module" src="../node_modules/@polymer/paper-listbox/paper-listbox.js"></script>
+  <script type="module" src="../spine-header-item.js"></script>
+  <script type="module" src="../spine-link-item.js"></script>
+  <script type="module" src="../spine-separator-item.js"></script>
+  <script type="module" src="../spine-item-body.js"></script>
 
-  <custom-style>
+  <!-- FIXME(polymer-modulizer):
+        These imperative modules that innerHTML your HTML are
+        a hacky way to be sure that any mixins in included style
+        modules are ready before any elements that reference them are
+        instantiated, otherwise the CSS @apply mixin polyfill won't be
+        able to expand the underlying CSS custom properties.
+        See: https://github.com/Polymer/polymer-modulizer/issues/154
+        -->
+  <script type="module">
+    const $_documentContainer = document.createElement('template');
+
+    $_documentContainer.innerHTML = `<custom-style>
     <style is="custom-style" include="demo-pages-shared-styles">
       .menu {
         border: 1px solid gray;
@@ -28,10 +40,15 @@
         }
       }
     </style>
-  </custom-style>
-</head>
-<body>
-<div class="vertical-section-container centered">
+  </custom-style>`;
+
+document.body.appendChild($_documentContainer.content);
+</script>
+
+<script type="module">
+const $_documentContainer = document.createElement('template');
+
+$_documentContainer.innerHTML = `<div class="vertical-section-container centered">
 
   <h3>Simple menu</h3>
   <demo-snippet>
@@ -97,6 +114,9 @@
     </template>
   </demo-snippet>
 
-</div>
-</body>
+</div>`;
+
+document.body.appendChild($_documentContainer.content);
+</script>
+</head>
 </html>
