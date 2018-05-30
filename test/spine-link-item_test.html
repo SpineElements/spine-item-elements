@@ -36,38 +36,28 @@
     `;
     document.body.appendChild($_documentContainer.content);
   </script>
-  <script type="module">
-    const $_documentContainer = document.createElement('template');
-    $_documentContainer.innerHTML = `
-      <test-fixture id="link-item">
-        <template>
-          <spine-link-item href="somePage.html">
-            <div class="custom">Some text</div>
-          </spine-link-item>
-        </template>
-      </test-fixture>
-    `;
-    document.body.appendChild($_documentContainer.content);
-  </script>
-  <script type="module">
-    const $_documentContainer = document.createElement('template');
-    $_documentContainer.innerHTML = `
-      <test-fixture id="cooperation-with-app-location">
-        <template>
-          <div>
-            <app-location></app-location>
-            <spine-link-item href="somePage1.html">
-              <div class="custom">Link item 1</div>
-            </spine-link-item>
-            <spine-link-item href="somePage2.html">
-              <div class="custom">Link item 2</div>
-            </spine-link-item>
-          </div>
-        </template>
-      </test-fixture>
-    `;
-    document.body.appendChild($_documentContainer.content);
-  </script>
+</head>
+<body>
+  <test-fixture id="link-item">
+    <template>
+      <spine-link-item href="somePage.html">
+        <div class="custom">Some text</div>
+      </spine-link-item>
+    </template>
+  </test-fixture>
+  <test-fixture id="cooperation-with-app-location">
+    <template>
+      <div>
+        <app-location></app-location>
+        <spine-link-item href="somePage1.html">
+          <div class="custom">Link item 1</div>
+        </spine-link-item>
+        <spine-link-item href="somePage2.html">
+          <div class="custom">Link item 2</div>
+        </spine-link-item>
+      </div>
+    </template>
+  </test-fixture>
 
   <script type="module">
     import '@polymer/iron-test-helpers/iron-test-helpers.js';
@@ -147,5 +137,5 @@
 
     });
   </script>
-</head>
+</body>
 </html>

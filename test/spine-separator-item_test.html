@@ -25,45 +25,43 @@
   </style>
 </head>
 <body>
-<test-fixture id="default-separator">
-  <template>
-    <spine-separator-item></spine-separator-item>
-  </template>
-</test-fixture>
+  <test-fixture id="default-separator">
+    <template>
+      <spine-separator-item></spine-separator-item>
+    </template>
+  </test-fixture>
 
-<test-fixture id="customized-separator">
-  <template>
-    <spine-separator-item class="customized-separator"></spine-separator-item>
-  </template>
-</test-fixture>
+  <test-fixture id="customized-separator">
+    <template>
+      <spine-separator-item class="customized-separator"></spine-separator-item>
+    </template>
+  </test-fixture>
 
-<script type="module">
-  import '../spine-separator-item.js';
+  <script type="module">
+    suite('<spine-separator-item>', function() {
+      const defaultVertPadding = 8;
+      const defaultLinewidth = 1;
 
-  suite('<spine-separator-item>', function() {
-    const defaultVertPadding = 8;
-    const defaultLinewidth = 1;
+      test('basic attributes are correct', () => {
+        const defaultSeparator = fixture('default-separator');
+        assert.equal(defaultSeparator.getAttribute('role'), 'separator');
+        assert.equal(defaultSeparator.getAttribute('tabindex'), '-1');
+        assert.isTrue(defaultSeparator.getAttribute('disabled') != null);
+        assert.equal(defaultSeparator.getAttribute('aria-disabled'), 'true');
+      });
 
-    test('basic attributes are correct', () => {
-    const defaultSeparator = fixture('default-separator');
-    assert.equal(defaultSeparator.getAttribute('role'), 'separator');
-    assert.equal(defaultSeparator.getAttribute('tabindex'), '-1');
-    assert.isTrue(defaultSeparator.getAttribute('disabled') != null);
-    assert.equal(defaultSeparator.getAttribute('aria-disabled'), 'true');
-  });
+      test('default height is correct', () => {
+        const defaultSeparator = fixture('default-separator');
+        assert.equal(defaultSeparator.offsetHeight, defaultVertPadding * 2 + defaultLinewidth);
+      });
 
-  test('default height is correct', () => {
-    const defaultSeparator = fixture('default-separator');
-    assert.equal(defaultSeparator.offsetHeight, defaultVertPadding * 2 + defaultLinewidth);
-  });
-
-  test('customized height is correct', () => {
-    const defaultSeparator = fixture('customized-separator');
-    const customizedVertPadding = 4;
-    const customizedLinewidth = 2;
-    assert.equal(defaultSeparator.offsetHeight, customizedVertPadding * 2 + customizedLinewidth);
-  });
-});
-</script>
+      test('customized height is correct', () => {
+        const defaultSeparator = fixture('customized-separator');
+        const customizedVertPadding = 4;
+        const customizedLinewidth = 2;
+        assert.equal(defaultSeparator.offsetHeight, customizedVertPadding * 2 + customizedLinewidth);
+      });
+    });
+  </script>
 </body>
 </html>
