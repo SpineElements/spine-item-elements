@@ -1,22 +1,25 @@
 /*
-  ~ Copyright (c) 2000-2018 TeamDev Ltd. All rights reserved.
-  ~ TeamDev PROPRIETARY and CONFIDENTIAL.
-  ~ Use is subject to license terms.
-  */
+ * Copyright (c) 2000-2018 TeamDev. All rights reserved.
+ * TeamDev PROPRIETARY and CONFIDENTIAL.
+ * Use is subject to license terms.
+ */
+
 import '@polymer/polymer/polymer-legacy.js';
 
 import { PolymerElement } from '@polymer/polymer/polymer-element.js';
 import { IronControlState } from '@polymer/iron-behaviors/iron-control-state.js';
 import { IronButtonState } from '@polymer/iron-behaviors/iron-button-state.js';
 import { mixinBehaviors } from '@polymer/polymer/lib/legacy/class.js';
+
 const $_documentContainer = document.createElement('template');
 $_documentContainer.setAttribute('style', 'display: none;');
-
-$_documentContainer.innerHTML = `<dom-module id="spine-abstract-item">
+$_documentContainer.innerHTML = `
+<dom-module id="spine-abstract-item">
   
 </dom-module>`;
 
 document.head.appendChild($_documentContainer.content);
+
 /**
  * Defines a base class for custom item elements that complement the standard `paper-item`
  * component for various usage scenarios.

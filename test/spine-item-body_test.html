@@ -9,7 +9,6 @@
   <meta charset="UTF-8">
   <title>spine-item-body test</title>
 
-  <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
   <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
   <script src="../node_modules/wct-browser-legacy/browser.js"></script>
   <script type="module" src="../spine-item-body.js"></script>
@@ -24,105 +23,98 @@
         -->
   <script type="module">
     const $_documentContainer = document.createElement('template');
-
-    $_documentContainer.innerHTML = `<custom-style>
-    <style is="custom-style" include="demo-pages-shared-styles">
-      body {
-        margin: 0;
-        font-family: Roboto, Noto, sans-serif;
-        --secondary-text-color: rgba(1, 2, 3, 0.5);
-      }
-    </style>
-  </custom-style>`;
-
-document.body.appendChild($_documentContainer.content);
-</script>
-<script type="module">
-const $_documentContainer = document.createElement('template');
-
-$_documentContainer.innerHTML = `<test-fixture id="primary-and-secondary">
-  <template>
-    <spine-item-body>
-      Primary text
-      <div secondary="">Secondary text</div>
-    </spine-item-body>
-  </template>
-</test-fixture>`;
-
-document.body.appendChild($_documentContainer.content);
-</script>
-<script type="module">
-const $_documentContainer = document.createElement('template');
-
-$_documentContainer.innerHTML = `<test-fixture id="both-slots-specified">
-  <template>
-    <spine-item-body primary-text="Primary text" secondary-text="Secondary text">
-      Primary text
-      <div secondary>Secondary text</div>
-      <div slot="before" class="before-element">"before" slot</div>
-      <div slot="after" class="after-element">"after" slot</div>
-    </spine-item-body>
-  </template>
-</test-fixture>`;
-
-document.body.appendChild($_documentContainer.content);
-</script>
-<script type="module">
-import './testing-utils.js';
-import '../spine-item-body.js';
-suite('<spine-item-body>', function () {
-
-  function assertSlotContent(itemBody, slotContainerSelector, expectedNodeCheckers, message) {
-    const beforeSlot = itemBody.shadowRoot
-      .querySelector(slotContainerSelector)
-      .querySelector('slot');
-    const slotNodes = beforeSlot.assignedNodes();
-    _checkNodeList(slotNodes, expectedNodeCheckers, message);
-  }
-
-  test('slot content is rendered correctly', done => {
-    const noSlotsItem = fixture('primary-and-secondary');
-    const bothSlotsItem = fixture('both-slots-specified');
-    flush(() => {
-      const beforeSlotSelector = '.before-cell';
-      const mainSlotSelector = '.main-cell';
-      const afterSlotSelector = '.after-cell';
-
-      assertSlotContent(bothSlotsItem, beforeSlotSelector,
-        [_checkers.element({name : 'div', className : 'before-element', innerHTML : '"before" slot'})],
-        'Checking a non-empty "before" slot');
-      assertSlotContent(bothSlotsItem, mainSlotSelector,
-        [
-          _checkers.textNode('Primary text'),
-          _checkers.element({name : 'div', className : null, innerHTML : 'Secondary text'})
-        ], 'Checking main slot content');
-      assertSlotContent(bothSlotsItem, afterSlotSelector,
-        [_checkers.element({name : 'div', className : 'after-element', innerHTML : '"after" slot'})],
-        'Checking a non-empty "after" slot');
-
-      assertSlotContent(noSlotsItem, beforeSlotSelector, null, 'Checking an empty "before" slot');
-      assertSlotContent(bothSlotsItem, mainSlotSelector,
-        [
-          _checkers.textNode('Primary text'),
-          _checkers.element({name : 'div', className : null, innerHTML : 'Secondary text'})
-        ], 'Checking main slot content');
-      assertSlotContent(noSlotsItem, afterSlotSelector, null, 'Checking an empty "after" slot');
-
-      done();
-    });
-  });
-
-  test('secondary content color is correct', () => {
-    const bothSlotsItem = fixture('both-slots-specified');
-    const secondaryContent = bothSlotsItem.querySelector('*[secondary]');
-    _checkers.element({
-      computedStyle : {
-        color : 'rgba(1, 2, 3, 0.5)'
-      }
-    })(secondaryContent, 'Checking secondary content color');
-  });
-
-});
-</script>
+    $_documentContainer.innerHTML = `
+      <custom-style>
+        <style is="custom-style" include="demo-pages-shared-styles">
+          body {
+            margin: 0;
+            font-family: Roboto, Noto, sans-serif;
+            --secondary-text-color: rgba(1, 2, 3, 0.5);
+          }
+        </style>
+      </custom-style>
+    `;
+    document.body.appendChild($_documentContainer.content);
+  </script>
 </head>
+<body>
+  <test-fixture id="primary-and-secondary">
+    <template>
+      <spine-item-body>
+        Primary text
+        <div secondary="">Secondary text</div>
+      </spine-item-body>
+    </template>
+  </test-fixture>
+
+  <test-fixture id="both-slots-specified">
+    <template>
+      <spine-item-body primary-text="Primary text" secondary-text="Secondary text">
+        Primary text
+        <div secondary>Secondary text</div>
+        <div slot="before" class="before-element">"before" slot</div>
+        <div slot="after" class="after-element">"after" slot</div>
+      </spine-item-body>
+    </template>
+  </test-fixture>
+
+  <script type="module">
+    import './testing-utils.js';
+    import '../spine-item-body.js';
+
+    suite('<spine-item-body>', function () {
+
+      function assertSlotContent(itemBody, slotContainerSelector, expectedNodeCheckers, message) {
+        const beforeSlot = itemBody.shadowRoot
+          .querySelector(slotContainerSelector)
+          .querySelector('slot');
+        const slotNodes = beforeSlot.assignedNodes();
+        _checkNodeList(slotNodes, expectedNodeCheckers, message);
+      }
+
+      test('slot content is rendered correctly', done => {
+        const noSlotsItem = fixture('primary-and-secondary');
+        const bothSlotsItem = fixture('both-slots-specified');
+        flush(() => {
+          const beforeSlotSelector = '.before-cell';
+          const mainSlotSelector = '.main-cell';
+          const afterSlotSelector = '.after-cell';
+
+          assertSlotContent(bothSlotsItem, beforeSlotSelector,
+            [_checkers.element({name : 'div', className : 'before-element', innerHTML : '"before" slot'})],
+            'Checking a non-empty "before" slot');
+          assertSlotContent(bothSlotsItem, mainSlotSelector,
+            [
+              _checkers.textNode('Primary text'),
+              _checkers.element({name : 'div', className : null, innerHTML : 'Secondary text'})
+            ], 'Checking main slot content');
+          assertSlotContent(bothSlotsItem, afterSlotSelector,
+            [_checkers.element({name : 'div', className : 'after-element', innerHTML : '"after" slot'})],
+            'Checking a non-empty "after" slot');
+
+          assertSlotContent(noSlotsItem, beforeSlotSelector, null, 'Checking an empty "before" slot');
+          assertSlotContent(bothSlotsItem, mainSlotSelector,
+            [
+              _checkers.textNode('Primary text'),
+              _checkers.element({name : 'div', className : null, innerHTML : 'Secondary text'})
+            ], 'Checking main slot content');
+          assertSlotContent(noSlotsItem, afterSlotSelector, null, 'Checking an empty "after" slot');
+
+          done();
+        });
+      });
+
+      test('secondary content color is correct', () => {
+        const bothSlotsItem = fixture('both-slots-specified');
+        const secondaryContent = bothSlotsItem.querySelector('*[secondary]');
+        _checkers.element({
+          computedStyle : {
+            color : 'rgba(1, 2, 3, 0.5)'
+          }
+        })(secondaryContent, 'Checking secondary content color');
+      });
+
+    });
+  </script>
+</body>
 </html>
