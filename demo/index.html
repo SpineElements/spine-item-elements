@@ -6,97 +6,109 @@
 
   <title>Spine item elements demo</title>
 
-  <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+  <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
 
-  <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
-  <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
-  <link rel="import" href="../../iron-icons/iron-icons.html">
-  <link rel="import" href="../../iron-icon/iron-icon.html">
-  <link rel="import" href="../../paper-styles/typography.html">
-  <link rel="import" href="../../paper-listbox/paper-listbox.html">
-  <link rel="import" href="../spine-header-item.html">
-  <link rel="import" href="../spine-link-item.html">
-  <link rel="import" href="../spine-separator-item.html">
-  <link rel="import" href="../spine-item-body.html">
+  <script type="module" src="../node_modules/@polymer/iron-demo-helpers/demo-pages-shared-styles.js"></script>
+  <script type="module" src="../node_modules/@polymer/iron-demo-helpers/demo-snippet.js"></script>
+  <script type="module" src="../node_modules/@polymer/iron-icons/iron-icons.js"></script>
+  <script type="module" src="../node_modules/@polymer/iron-icon/iron-icon.js"></script>
+  <script type="module" src="../node_modules/@polymer/paper-styles/typography.js"></script>
+  <script type="module" src="../node_modules/@polymer/paper-listbox/paper-listbox.js"></script>
+  <script type="module" src="../spine-header-item.js"></script>
+  <script type="module" src="../spine-link-item.js"></script>
+  <script type="module" src="../spine-separator-item.js"></script>
+  <script type="module" src="../spine-item-body.js"></script>
 
-  <custom-style>
-    <style is="custom-style" include="demo-pages-shared-styles">
-      .menu {
-        border: 1px solid gray;
-        --spine-item-body-before-cell: {
-          padding-right: 8px;
-        }
-      }
-    </style>
-  </custom-style>
+  <script type="module">
+    const template = document.createElement('template');
+    template.innerHTML = `
+      <custom-style>
+        <style is="custom-style" include="demo-pages-shared-styles">
+          .menu {
+            border: 1px solid gray;
+            --spine-item-body-before-cell: {
+              padding-right: 8px;
+            }
+          }
+        </style>
+      </custom-style>
+    `;
+    document.body.appendChild(template.content);
+  </script>
 </head>
 <body>
-<div class="vertical-section-container centered">
+<script type="module">
+  const template = document.createElement('template');
+  template.innerHTML = `
+    <div class="vertical-section-container centered">
 
-  <h3>Simple menu</h3>
-  <demo-snippet>
-    <template>
-      <paper-listbox class="menu">
-        <spine-header-item>spine-item-elements</spine-header-item>
+      <h3>Simple menu</h3>
+      <demo-snippet>
+        <template>
+          <paper-listbox class="menu">
+            <spine-header-item>spine-item-elements</spine-header-item>
 
-        <spine-link-item href="https://github.com/SpineElements/spine-item-elements">
-          <spine-item-body>
-            <iron-icon slot="before" icon="star"></iron-icon>
-            Overview
-          </spine-item-body>
-        </spine-link-item>
-        <spine-link-item href="https://github.com/SpineElements/spine-item-elements/blob/master/spine-header-item.html">
-          <spine-item-body>
-            <iron-icon slot="before" icon="chevron-right"></iron-icon>
-            spine-header-item
-          </spine-item-body>
-        </spine-link-item>
-        <spine-link-item href="https://github.com/SpineElements/spine-item-elements/blob/master/spine-link-item.html">
-          <spine-item-body>
-            <iron-icon slot="before" icon="chevron-right"></iron-icon>
-            spine-link-item
-          </spine-item-body>
-        </spine-link-item>
-        <spine-link-item href="https://github.com/SpineElements/spine-item-elements/blob/master/spine-separator-item.html">
-          <spine-item-body>
-            <iron-icon slot="before" icon="chevron-right"></iron-icon>
-            spine-separator-item
-          </spine-item-body>
-        </spine-link-item>
-        <spine-link-item href="https://github.com/SpineElements/spine-item-elements/blob/master/spine-item-body.html">
-          <spine-item-body>
-            <iron-icon slot="before" icon="chevron-right"></iron-icon>
-            spine-item-body
-          </spine-item-body>
-        </spine-link-item>
+            <spine-link-item href="https://github.com/SpineElements/spine-item-elements">
+              <spine-item-body>
+                <iron-icon slot="before" icon="star"></iron-icon>
+                Overview
+              </spine-item-body>
+            </spine-link-item>
+            <spine-link-item href="https://github.com/SpineElements/spine-item-elements/blob/master/spine-header-item.html">
+              <spine-item-body>
+                <iron-icon slot="before" icon="chevron-right"></iron-icon>
+                spine-header-item
+              </spine-item-body>
+            </spine-link-item>
+            <spine-link-item href="https://github.com/SpineElements/spine-item-elements/blob/master/spine-link-item.html">
+              <spine-item-body>
+                <iron-icon slot="before" icon="chevron-right"></iron-icon>
+                spine-link-item
+              </spine-item-body>
+            </spine-link-item>
+            <spine-link-item href="https://github.com/SpineElements/spine-item-elements/blob/master/spine-separator-item.html">
+              <spine-item-body>
+                <iron-icon slot="before" icon="chevron-right"></iron-icon>
+                spine-separator-item
+              </spine-item-body>
+            </spine-link-item>
+            <spine-link-item href="https://github.com/SpineElements/spine-item-elements/blob/master/spine-item-body.html">
+              <spine-item-body>
+                <iron-icon slot="before" icon="chevron-right"></iron-icon>
+                spine-item-body
+              </spine-item-body>
+            </spine-link-item>
 
-        <spine-separator-item></spine-separator-item>
+            <spine-separator-item></spine-separator-item>
 
-        <spine-header-item>Other elements</spine-header-item>
+            <spine-header-item>Other elements</spine-header-item>
 
-        <spine-link-item href="https://github.com/SpineElements/spine-avatar">
-          <spine-item-body>
-            <iron-icon slot="before" icon="star"></iron-icon>
-            spine-avatar
-          </spine-item-body>
-        </spine-link-item>
-        <spine-link-item href="https://github.com/SpineElements/spine-badge">
-          <spine-item-body>
-            <iron-icon slot="before" icon="star"></iron-icon>
-            spine-badge
-          </spine-item-body>
-        </spine-link-item>
-        <spine-link-item href="https://github.com/SpineElements/some-disabled-item" disabled>
-          <spine-item-body>
-            <iron-icon slot="before" icon="star"></iron-icon>
-            some-disabled-item
-          </spine-item-body>
-        </spine-link-item>
+            <spine-link-item href="https://github.com/SpineElements/spine-avatar">
+              <spine-item-body>
+                <iron-icon slot="before" icon="star"></iron-icon>
+                spine-avatar
+              </spine-item-body>
+            </spine-link-item>
+            <spine-link-item href="https://github.com/SpineElements/spine-badge">
+              <spine-item-body>
+                <iron-icon slot="before" icon="star"></iron-icon>
+                spine-badge
+              </spine-item-body>
+            </spine-link-item>
+            <spine-link-item href="https://github.com/SpineElements/some-disabled-item" disabled>
+              <spine-item-body>
+                <iron-icon slot="before" icon="star"></iron-icon>
+                some-disabled-item
+              </spine-item-body>
+            </spine-link-item>
 
-      </paper-listbox>
-    </template>
-  </demo-snippet>
+          </paper-listbox>
+        </template>
+      </demo-snippet>
 
-</div>
+    </div>
+  `;
+  document.body.appendChild(template.content);
+</script>
 </body>
 </html>

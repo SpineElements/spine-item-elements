@@ -9,10 +9,9 @@
   <meta charset="UTF-8">
   <title>spine-separator-item test</title>
 
-  <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
-  <script src="../../web-component-tester/browser.js"></script>
-
-  <link rel="import" href="../spine-separator-item.html">
+  <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
+  <script src="../node_modules/wct-browser-legacy/browser.js"></script>
+  <script type="module" src="../spine-separator-item.js"></script>
 
   <style>
     body {
@@ -26,43 +25,43 @@
   </style>
 </head>
 <body>
-<test-fixture id="default-separator">
-  <template>
-    <spine-separator-item></spine-separator-item>
-  </template>
-</test-fixture>
+  <test-fixture id="default-separator">
+    <template>
+      <spine-separator-item></spine-separator-item>
+    </template>
+  </test-fixture>
 
-<test-fixture id="customized-separator">
-  <template>
-    <spine-separator-item class="customized-separator"></spine-separator-item>
-  </template>
-</test-fixture>
+  <test-fixture id="customized-separator">
+    <template>
+      <spine-separator-item class="customized-separator"></spine-separator-item>
+    </template>
+  </test-fixture>
 
-<script>
-  suite('<spine-separator-item>', function() {
-    const defaultVertPadding = 8;
-    const defaultLinewidth = 1;
+  <script type="module">
+    suite('<spine-separator-item>', function() {
+      const defaultVertPadding = 8;
+      const defaultLinewidth = 1;
 
-    test('basic attributes are correct', () => {
-      const defaultSeparator = fixture('default-separator');
-      assert.equal(defaultSeparator.getAttribute('role'), 'separator');
-      assert.equal(defaultSeparator.getAttribute('tabindex'), '-1');
-      assert.isTrue(defaultSeparator.getAttribute('disabled') != null);
-      assert.equal(defaultSeparator.getAttribute('aria-disabled'), 'true');
+      test('basic attributes are correct', () => {
+        const defaultSeparator = fixture('default-separator');
+        assert.equal(defaultSeparator.getAttribute('role'), 'separator');
+        assert.equal(defaultSeparator.getAttribute('tabindex'), '-1');
+        assert.isTrue(defaultSeparator.getAttribute('disabled') != null);
+        assert.equal(defaultSeparator.getAttribute('aria-disabled'), 'true');
+      });
+
+      test('default height is correct', () => {
+        const defaultSeparator = fixture('default-separator');
+        assert.equal(defaultSeparator.offsetHeight, defaultVertPadding * 2 + defaultLinewidth);
+      });
+
+      test('customized height is correct', () => {
+        const defaultSeparator = fixture('customized-separator');
+        const customizedVertPadding = 4;
+        const customizedLinewidth = 2;
+        assert.equal(defaultSeparator.offsetHeight, customizedVertPadding * 2 + customizedLinewidth);
+      });
     });
-
-    test('default height is correct', () => {
-      const defaultSeparator = fixture('default-separator');
-      assert.equal(defaultSeparator.offsetHeight, defaultVertPadding * 2 + defaultLinewidth);
-    });
-
-    test('customized height is correct', () => {
-      const defaultSeparator = fixture('customized-separator');
-      const customizedVertPadding = 4;
-      const customizedLinewidth = 2;
-      assert.equal(defaultSeparator.offsetHeight, customizedVertPadding * 2 + customizedLinewidth);
-    });
-  });
-</script>
+  </script>
 </body>
 </html>
