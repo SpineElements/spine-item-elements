@@ -11,14 +11,14 @@ import { IronControlState } from '@polymer/iron-behaviors/iron-control-state.js'
 import { IronButtonState } from '@polymer/iron-behaviors/iron-button-state.js';
 import { mixinBehaviors } from '@polymer/polymer/lib/legacy/class.js';
 
-const $_documentContainer = document.createElement('template');
-$_documentContainer.setAttribute('style', 'display: none;');
-$_documentContainer.innerHTML = `
-<dom-module id="spine-abstract-item">
-  
-</dom-module>`;
-
-document.head.appendChild($_documentContainer.content);
+const template = document.createElement('template');
+template.setAttribute('style', 'display: none;');
+template.innerHTML = `
+  <dom-module id="spine-abstract-item">
+    
+  </dom-module>
+`;
+document.head.appendChild(template.content);
 
 /**
  * Defines a base class for custom item elements that complement the standard `paper-item`
@@ -39,4 +39,3 @@ export class SpineAbstractItem extends mixinBehaviors([
     this._ensureAttribute('role', this._getAriaRole());
   }
 }
-
